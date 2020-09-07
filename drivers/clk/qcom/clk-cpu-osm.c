@@ -39,7 +39,7 @@
 #include "clk-voter.h"
 #include "clk-debug.h"
 
-#define OSM_INIT_RATE			300000000UL
+#define OSM_INIT_RATE			100000000UL
 #define XO_RATE				19200000UL
 #define OSM_TABLE_SIZE			40
 #define OSM_TABLE_REDUCED_SIZE		12
@@ -725,8 +725,13 @@ static int osm_cpufreq_cpu_init(struct cpufreq_policy *policy)
 		/* Save the frequencies in terms of KHz */
 		if (!src)
 			table[i].frequency = OSM_INIT_RATE / 1000;
-		else
-			table[i].frequency = (XO_RATE * lval) / 1000;
+		else {
+
+
+				table[i].frequency = ((XO_RATE * lval) / 1000) - 200000;
+		                if (table[i].frequency > 1200000)
+					table[i].frequency = ((XO_RATE * lval) / 1000) ;
+		}
 		table[i].driver_data = table[i].frequency;
 
 		/* Ignore frequency if not present in DT table */
