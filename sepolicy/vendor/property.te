@@ -1,0 +1,5 @@
+# Dirac
+vendor_internal_prop(dirac_prop);
+
+# IR
+vendor_internal_prop(lirc_prop);

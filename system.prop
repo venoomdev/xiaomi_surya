@@ -1,0 +1,75 @@
+# Audio
+ro.config.media_vol_default=8
+ro.config.media_vol_steps=25
+ro.config.vc_call_vol_default=6
+ro.config.vc_call_vol_steps=7
+
+# Bluetooth
+persist.vendor.bt.a2dp.aac_whitelist=false
+persist.vendor.bt.a2dp.hal.implementation=true
+persist.vendor.bt.aac_frm_ctl.enabled=true
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
+ro.bluetooth.library_name=libbluetooth_qti.so
+vendor.bluetooth.soc=cherokee
+
+# Camera
+persist.vendor.camera.privapp.list=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera
+
+# Battery Property
+ro.charger.enable_suspend=true
+persist.vendor.quick.charge=1
+
+# Media
+media.aac_51_output_enabled=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-http=true
+media.stagefright.enable-player=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-scan=true
+media.stagefright.thumbnail.prefer_hw_codecs=true
+mmp.enable.3g2=true
+persist.mm.enable.prefetch=true
+
+# Netflix custom property
+ro.netflix.bsp_rev=Q6150-17263-1
+
+# System prop for NFC DT
+ro.nfc.port=I2C
+
+# Radio
+DEVICE_PROVISIONED=1
+persist.radio.multisim.config=dsds
+persist.sys.fflag.override.settings_provider_model=false
+ril.subscription.types=NV,RUIM
+ro.telephony.default_cdma_sub=0
+ro.telephony.default_network=22,20
+telephony.lteOnCdmaDevice=1
+
+# Recovery
+ro.recovery.ui.margin_height=48
+
+# Time
+persist.timed.enable=true
+persist.vendor.delta_time.enable=true
+
+#property to enable user to access Google WFD settings
+persist.debug.wfd.enable=1
+##property to choose between virtual/external wfd display
+persist.sys.wfd.virtual=0
+
+# WiFi
+wifi.interface=wlan0
+
+# ZRAM
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=180
+ro.zram.periodic_wb_delay_hours=24
+
+# Supported AOSP Feature
+ro.support_one_handed_mode=true
+
+# support otg reverse charge
+persist.vendor.otg_control=true
