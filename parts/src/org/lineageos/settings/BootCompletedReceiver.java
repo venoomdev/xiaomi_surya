@@ -28,6 +28,7 @@ import org.lineageos.settings.utils.FileUtils;
 import org.lineageos.settings.dirac.DiracUtils;
 import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
+import org.lineageos.settings.refreshrate.RefreshUtils;
 
 public class BootCompletedReceiver extends BroadcastReceiver implements Controller {
 
@@ -61,7 +62,8 @@ public class BootCompletedReceiver extends BroadcastReceiver implements Controll
         }
     
         // Dirac
-        // new DiracUtils(context).onBootCompleted();
+        new DiracUtils(context).onBootCompleted();
+	RefreshUtils.startService(context);
         DozeUtils.checkDozeService(context);
         ThermalUtils.startService(context);
     }

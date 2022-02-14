@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.dirac;
+package org.lineageos.settings.refreshrate;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-public class DiracActivity extends PreferenceActivity {
+public class RefreshActivity extends PreferenceActivity {
 
-    private static final String TAG_DIRAC = "dirac";
+    private static final String TAG_REFRESH = "refresh";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new DiracSettingsFragment(), TAG_DIRAC).commit();
+                new RefreshSettingsFragment(), TAG_REFRESH).commit();
     }
 }
