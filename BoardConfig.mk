@@ -111,6 +111,7 @@ BOARD_KERNEL_CMDLINE += kpti=off cgroup.memory=nokmem,nosocket
 
 TARGET_KERNEL_ADDITIONAL_FLAGS := LLVM=1
 TARGET_KERNEL_ADDITIONAL_FLAGS += HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
+TARGET_KERNEL_ADDITIONAL_FLAGS += LD=ld.lld AS=llvm-as AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip
 TARGET_KERNEL_ADDITIONAL_FLAGS += CONFIG_MSM_PERFORMANCE=n
 
 TARGET_KERNEL_CLANG_COMPILE := true

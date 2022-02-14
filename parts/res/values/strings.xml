@@ -7,7 +7,8 @@
     <string name="dirac_summary">Optimize audio quality</string>
     <string name="dirac_headset_title">Choose headphones type</string>
     <string name="dirac_preset_title">Choose a preset</string>
-
+    <string name="dirac_enable">Enable dirac</string>
+   
     <!-- Dirac settings: Headset types -->
     <string name="dirac_headset_default">Default</string>
     <string name="dirac_headset_earbuds">Mi Earbuds</string>
@@ -128,5 +129,13 @@
     <string name="refresh_standard">Standard (60Hz)</string>
     <string name="refresh_high">High (90Hz)</string>
     <string name="refresh_extreme">Extreme (120Hz)</string>
+
+     <!-- Haptic Level Settings -->
+     <string name="haptic_title">Haptic feedback</string>
+     <string name="haptic_warning">Setting-up haptic level too high may cause permanent hardware damage, use at your own risk</string>
+     <string name="haptic_summary">Customize vibration intensity</string>
+     <string name="haptic_level_title">Level</string>
+     <string name="haptic_level_summary">The amount of vibration intensity</string>
+     <string name="haptic_level_summary_incompatible">Kernel did not support this feature</string>
 
 </resources>

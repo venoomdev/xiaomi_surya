@@ -15,6 +15,7 @@
 on init
     chown system system /proc/tp_gesture
     chmod 0644 /proc/tp_gesture
+    write /proc/tp_gesture "1"
 
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp

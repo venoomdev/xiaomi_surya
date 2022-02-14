@@ -29,11 +29,17 @@ import org.lineageos.settings.dirac.DiracUtils;
 import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
 import org.lineageos.settings.refreshrate.RefreshUtils;
+import org.lineageos.settings.haptic.HapticUtils;
 
 public class BootCompletedReceiver extends BroadcastReceiver implements Controller {
+    private static final boolean DEBUG = false;
+    private static final String TAG = "XiaomiParts";
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+
+        if (DEBUG)
+            Log.d(TAG, "Received boot completed intent");
 
         if (Settings.Secure.getInt(context.getContentResolver(), PREF_ENABLED, 0) == 1) {
             FileUtils.setValue(KCAL_ENABLE, Settings.Secure.getInt(context.getContentResolver(),
@@ -62,9 +68,11 @@ public class BootCompletedReceiver extends BroadcastReceiver implements Controll
         }
     
         // Dirac
-        new DiracUtils(context).onBootCompleted();
+        // new DiracUtils(context).onBootCompleted();
+        DiracUtils.initialize(context);
 	RefreshUtils.startService(context);
         DozeUtils.checkDozeService(context);
         ThermalUtils.startService(context);
+	HapticUtils.restoreLevel(context);
     }
 }
