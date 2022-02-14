@@ -314,6 +314,18 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
+# Camera
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service_64 \
+    libdng_sdk.vendor \
+    libgui_vendor \
+    libxml2 \
+    CameraGo \
+    vendor.qti.hardware.camera.device@1.0.vendor
+
+# Inherit GoogleCamera
+$(call inherit-product-if-exists, vendor/GoogleCameraSweet/Camera.mk)
 
 PRODUCT_COPY_FILES += \
     hardware/qcom-caf/sm8150/media/conf_files/sm6150/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
