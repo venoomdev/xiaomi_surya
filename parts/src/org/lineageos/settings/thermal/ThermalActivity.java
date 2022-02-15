@@ -29,11 +29,12 @@ public class ThermalActivity extends CollapsingToolbarBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction().replace(R.id.content_frame,
+
+         getFragmentManager().beginTransaction().replace(R.id.content_frame,
                 new ThermalSettingsFragment(), TAG_THERMAL).commit();
     }
 
-    @Override
+  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();

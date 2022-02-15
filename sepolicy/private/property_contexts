@@ -27,3 +27,7 @@ ro.miui.                       u:object_r:exported_system_prop:s0
 
 # XiaomiParts
 persist.lcd.                   u:object_r:persist_lcd_prop:s0
+
+# Kcal
+/sys/devices/platform/kcal_ctrl.0(/.*)?                      u:object_r:kcal_dev:s0
+/sys/bus/platform/drivers/kcal_ctrl(/.*)?                    u:object_r:kcal_dev:s0

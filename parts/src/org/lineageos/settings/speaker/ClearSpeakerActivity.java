@@ -30,6 +30,8 @@ public class ClearSpeakerActivity extends CollapsingToolbarBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         Fragment fragment = getFragmentManager().findFragmentById(R.id.content_frame);
         ClearSpeakerFragment clearSpeakerFragment;
         if (fragment == null) {
@@ -43,7 +45,7 @@ public class ClearSpeakerActivity extends CollapsingToolbarBaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finishAfterTransition();
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

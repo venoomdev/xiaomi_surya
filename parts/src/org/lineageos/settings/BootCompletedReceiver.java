@@ -20,7 +20,6 @@ package org.lineageos.settings;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.util.Log;
 import android.provider.Settings;
 
@@ -28,8 +27,8 @@ import org.lineageos.settings.utils.FileUtils;
 import org.lineageos.settings.dirac.DiracUtils;
 import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
-import org.lineageos.settings.refreshrate.RefreshUtils;
 import org.lineageos.settings.haptic.HapticUtils;
+import org.lineageos.settings.refreshrate.RefreshUtils;
 
 public class BootCompletedReceiver extends BroadcastReceiver implements Controller {
     private static final boolean DEBUG = false;
@@ -37,10 +36,9 @@ public class BootCompletedReceiver extends BroadcastReceiver implements Controll
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-
         if (DEBUG)
             Log.d(TAG, "Received boot completed intent");
-
+            
         if (Settings.Secure.getInt(context.getContentResolver(), PREF_ENABLED, 0) == 1) {
             FileUtils.setValue(KCAL_ENABLE, Settings.Secure.getInt(context.getContentResolver(),
                     PREF_ENABLED, 0));
@@ -66,13 +64,11 @@ public class BootCompletedReceiver extends BroadcastReceiver implements Controll
             FileUtils.setValue(KCAL_HUE, Settings.Secure.getInt(context.getContentResolver(),
                     PREF_HUE, HUE_DEFAULT));
         }
-    
-        // Dirac
-        // new DiracUtils(context).onBootCompleted();
-        DiracUtils.initialize(context);
-	RefreshUtils.startService(context);
+        
+        DiracUtils.initialize();
         DozeUtils.checkDozeService(context);
         ThermalUtils.startService(context);
-	HapticUtils.restoreLevel(context);
+        HapticUtils.restoreLevel(context);
+        RefreshUtils.startService(context);
     }
 }

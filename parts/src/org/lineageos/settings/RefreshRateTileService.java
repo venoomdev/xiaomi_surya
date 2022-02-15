@@ -29,7 +29,6 @@ import java.util.Locale;
 
 public class RefreshRateTileService extends TileService {
     private static final String KEY_MIN_REFRESH_RATE = "min_refresh_rate";
-    private static final String KEY_PREFERRED_REFRESH_RATE = "preferred_refresh_rate";
     private static final String KEY_PEAK_REFRESH_RATE = "peak_refresh_rate";
 
     private Context context;
@@ -67,15 +66,15 @@ public class RefreshRateTileService extends TileService {
     }
 
     private void cycleRefreshRate() {
-        if (activeRateMin < availableRates.size() - 1) {
-            activeRateMin++;
-        } else {
-            activeRateMin = 0;
+        if(activeRateMax == 0){
+    	    if(activeRateMin == 0){
+                activeRateMin= availableRates.size();
+	    }
+	    activeRateMax = activeRateMin;
+	    float rate = availableRates.get(activeRateMin - 1);
+  	    Settings.System.putFloat(context.getContentResolver(), KEY_MIN_REFRESH_RATE, rate);
         }
-
-        float rate = availableRates.get(activeRateMin);
-        Settings.System.putFloat(context.getContentResolver(), KEY_MIN_REFRESH_RATE, rate);
-        Settings.System.putFloat(context.getContentResolver(), KEY_PREFERRED_REFRESH_RATE, rate);
+        float rate = availableRates.get(activeRateMax - 1);
         Settings.System.putFloat(context.getContentResolver(), KEY_PEAK_REFRESH_RATE, rate);
     }
 
@@ -87,7 +86,7 @@ public class RefreshRateTileService extends TileService {
         displayText = String.format(Locale.US, min == max ? "%d Hz" : "%d - %d Hz", min, max);
         tile.setContentDescription(displayText);
         tile.setSubtitle(displayText);
-        tile.setState(min == max ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        tile.setState(min != max ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         tile.updateTile();
     }
 
