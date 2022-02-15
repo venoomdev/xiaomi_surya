@@ -18,6 +18,5 @@
     <privapp-permissions package="org.lineageos.settings">
         <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
         <permission name="android.permission.INTERACT_ACROSS_USERS"/>
-        <permission name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     </privapp-permissions>
 </permissions>

@@ -11,11 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-on post-fs-data
-    # Allow system to adjust haptic level directly
-    chown system system /sys/devices/platform/soc/884000.i2c/i2c-3/3-005a/ulevel
-    chmod 0664 /sys/devices/platform/soc/884000.i2c/i2c-3/3-005a/ulevel
-    write /proc/tp_gesture 1
 
 on boot
     chown system system /sys/devices/platform/soc/soc:qcom,dsi-display/cabc
@@ -64,4 +59,3 @@ on property:sys.perf_profile=0
     write /sys/module/cpu_boost/parameters/input_boost_ms 100
     write /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/governor bw_hwmon
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    write /proc/tp_gesture 1
