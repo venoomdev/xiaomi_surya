@@ -39,6 +39,7 @@ public class ThermalService extends Service {
 
     private String mPreviousApp;
     private ThermalUtils mThermalUtils;
+
     private IActivityTaskManager mActivityTaskManager;
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
@@ -78,6 +79,7 @@ public class ThermalService extends Service {
     private void registerReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
         this.registerReceiver(mIntentReceiver, filter);
     }
 

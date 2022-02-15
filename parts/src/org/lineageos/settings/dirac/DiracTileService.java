@@ -9,7 +9,7 @@ public class DiracTileService extends TileService {
     public void onStartListening() {
 
         Tile tile = getQsTile();
-        if (DiracUtils.isDiracEnabled(this)) {
+        if (DiracUtils.isDiracEnabled()) {
             tile.setState(Tile.STATE_ACTIVE);
         } else {
             tile.setState(Tile.STATE_INACTIVE);
@@ -23,11 +23,11 @@ public class DiracTileService extends TileService {
     @Override
     public void onClick() {
         Tile tile = getQsTile();
-        if (DiracUtils.isDiracEnabled(this)) {
-            DiracUtils.setMusic(false);
+        if (DiracUtils.isDiracEnabled()) {
+            DiracUtils.setEnabled(false);
             tile.setState(Tile.STATE_INACTIVE);
         } else {
-            DiracUtils.setMusic(true);
+            DiracUtils.setEnabled(true);
             tile.setState(Tile.STATE_ACTIVE);
         }
         tile.updateTile();
