@@ -21,6 +21,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from surya device
 $(call inherit-product, device/xiaomi/surya/device.mk)
 
+# RefreshRate Settings
+$(call inherit-product, device/xiaomi/surya/refreshrate.mk)
+USE_DYNAMIC_REFRESH_RATE := true
+
 # Inherit some common Arcana stuff
 $(call inherit-product, vendor/aosp/common.mk)
 ARCANA_MAINTAINER := pocongtobat
@@ -35,3 +39,4 @@ PRODUCT_MODEL := POCO X3 NFC
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+
