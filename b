@@ -13,7 +13,7 @@ SECONDS=0 # builtin bash timer
 KERNEL_DIR=$(pwd)
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 ZIPNAME="venoom-surya-$(date '+%Y%m%d-%H%M').zip"
-TC_DIR="/root/kernel/clang"
+TC_DIR="/root/kernel/c"
 GCC_64_DIR="/root/kernel/gcc/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64"
 GCC_32_DIR="/root/kernel/gcc/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64"
 export KBUILD_BUILD_HOST="Venoom"
@@ -27,7 +27,7 @@ export CCACHE_DIR="/root/.cache/ccache"
 export CA="ccache gcc"
 export CXX="ccache g++"
 export PATH="/usr/lib/ccache:$PATH"
-export KBUILD_COMPILER_STRING="/root/kernel/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
+export KBUILD_COMPILER_STRING="/root/kernel/c/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 
 
 if [[ $1 = "-r" || $1 = "--regen" ]]; then
