@@ -101,6 +101,8 @@ vendor.qcom.bluetooth.soc=cherokee
 
 # Camera
 camera.disable_zsl_mode=1
+persist.vendor.camera.privapp.list=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera
+vendor.camera.aux.packagelist=org.codeaurora.snapcam,org.lineageos.snap,com.android.camera
 
 # Data modules
 persist.vendor.data.iwlan.enable=true

@@ -1,8 +1,30 @@
+# Audio
+ro.config.media_vol_default=8
+ro.config.media_vol_steps=25
+ro.config.vc_call_vol_default=5
+ro.config.vc_call_vol_steps=6
+
+# Bluetooth
+persist.vendor.bt.a2dp.aac_whitelist=false
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
+vendor.bluetooth.soc=cherokee
+
 # Bluetooth
 vendor.bluetooth.soc=cherokee
 
 # Camera
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
+
+# Dalvik
+dalvik.vm.dex2oat64.enabled=true
+
+# Dexopt
+pm.dexopt.first-boot=quicken
+pm.dexopt.bg-dexopt=everything
+
+# Quick Tap
+persist.acryl.columbus.model=tap7cls_crosshatch.tflite
 
 # Charger
 ro.charger.enable_suspend=true
@@ -25,10 +47,6 @@ persist.mm.enable.prefetch=true
 # Netflix custom property
 ro.netflix.bsp_rev=Q6150-17263-1
 
-# Octavi
-ro.octavi.maintainer=Tushar
-persist.sys.binary_xml=false
-
 # Perfetto
 persist.device_config.runtime_native_boot.iorap_readahead_enable=true
 
@@ -46,8 +64,14 @@ ro.telephony.default_cdma_sub=0
 ro.telephony.default_network=22,22
 telephony.lteOnCdmaDevice=1
 
+# FUSE passthrough
+persist.sys.fuse.passthrough.enable=true
+
 # Recovery
 ro.recovery.ui.margin_height=48
 
 # WiFi
 wifi.interface=wlan0
+
+# Zygote
+persist.device_config.runtime_native.usap_pool_enabled=true
