@@ -153,16 +153,13 @@ static void tcp_event_data_sent(struct tcp_sock *tp,
 	if (tcp_packets_in_flight(tp) == 0)
 		tcp_ca_event(sk, CA_EVENT_TX_START);
 
-	/* If this is the first data packet sent in response to the
-	 * previous received data,
-	 * and it is a reply for ato after last received packet,
-	 * increase pingpong count.
-	 */
-	if (before(tp->lsndtime, icsk->icsk_ack.lrcvtime) &&
-	    (u32)(now - icsk->icsk_ack.lrcvtime) < icsk->icsk_ack.ato)
-		inet_csk_inc_pingpong_cnt(sk);
-
 	tp->lsndtime = now;
+
+	/* If it is a reply for ato after last received
+	 * packet, enter pingpong mode.
+	 */
+	if ((u32)(now - icsk->icsk_ack.lrcvtime) < icsk->icsk_ack.ato)
+		icsk->icsk_ack.pingpong = 1;
 }
 
 /* Account for an ACK we sent. */
@@ -974,12 +971,12 @@ static void tcp_internal_pacing(struct sock *sk, const struct sk_buff *skb)
 	struct tcp_sock *tp = tcp_sk(sk);
 	ktime_t expire, now;
 	u64 len_ns;
-	unsigned long rate;
+	u32 rate;
 
 	if (!tcp_needs_internal_pacing(sk))
 		return;
 	rate = sk->sk_pacing_rate;
-	if (!rate || rate == ~0UL)
+	if (!rate || rate == ~0U)
 		return;
 
 	len_ns = (u64)skb->len * NSEC_PER_SEC;
@@ -1724,9 +1721,8 @@ static u32 tcp_tso_autosize(const struct sock *sk, unsigned int mss_now,
 {
 	u32 bytes, segs;
 
-	bytes = min_t(unsigned long,
-		      sk->sk_pacing_rate >> sk->sk_pacing_shift,
-		      sk->sk_gso_max_size - 1 - MAX_TCP_HEADER);
+	bytes = min(sk->sk_pacing_rate >> sk->sk_pacing_shift,
+		    sk->sk_gso_max_size - 1 - MAX_TCP_HEADER);
 
 	/* Goal is to send at least one packet per ms,
 	 * not one big TSO packet every 100 ms.
@@ -2236,12 +2232,11 @@ static int tcp_mtu_probe(struct sock *sk)
 static bool tcp_small_queue_check(struct sock *sk, const struct sk_buff *skb,
 				  unsigned int factor)
 {
-	unsigned long limit;
+	unsigned int limit;
 
-	limit = max_t(unsigned long,
-		      2 * skb->truesize,
-		      sk->sk_pacing_rate >> sk->sk_pacing_shift);
-	limit = min_t(unsigned long, limit, sysctl_tcp_limit_output_bytes);
+	limit = max(2 * skb->truesize, sk->sk_pacing_rate >> sk->sk_pacing_shift);
+	limit = min_t(u32, limit,
+		      sock_net(sk)->ipv4.sysctl_tcp_limit_output_bytes);
 	limit <<= factor;
 
 	if (refcount_read(&sk->sk_wmem_alloc) > limit) {
@@ -3589,7 +3584,7 @@ void tcp_send_delayed_ack(struct sock *sk)
 		const struct tcp_sock *tp = tcp_sk(sk);
 		int max_ato = HZ / 2;
 
-		if (inet_csk_in_pingpong_mode(sk) ||
+		if (icsk->icsk_ack.pingpong ||
 		    (icsk->icsk_ack.pending & ICSK_ACK_PUSHED))
 			max_ato = TCP_DELACK_MAX;
 
@@ -3821,3 +3816,4 @@ int tcp_rtx_synack(const struct sock *sk, struct request_sock *req)
 	return res;
 }
 EXPORT_SYMBOL(tcp_rtx_synack);
+
